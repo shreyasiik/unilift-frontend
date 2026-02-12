@@ -1,24 +1,56 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useState } from "react";
+
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import DriverDashboard from "./pages/DriverDashboard";
+import RiderDashboard from "./pages/RiderDashboard";
+import CreateRide from "./pages/CreateRide";
+import RideStatus from "./pages/RideStatus";
+import SearchRide from "./pages/SearchRide";
+import DriverRideConfirmed from "./pages/DriverRideConfirmed";
+
+
+import "./App.css";
 
 function App() {
+  // ✅ GLOBAL RIDES STATE
+  const [rides, setRides] = useState([]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+
+        <Route path="/login/:role" element={<Login />} />
+        <Route path="/signup/:role" element={<Signup />} />
+
+        <Route
+          path="/driver/dashboard"
+          element={<DriverDashboard rides={rides} />}
+        />
+
+        <Route
+          path="/rider/dashboard"
+          element={<RiderDashboard rides={rides} />}
+        />
+
+        <Route
+          path="/driver/create-ride"
+          element={<CreateRide setRides={setRides} />}
+        />
+
+        <Route path="/search-ride" element={<SearchRide />} />
+
+        <Route path="/ride-status/:status" element={<RideStatus />} />
+        <Route
+  path="/driver/ride-confirmed"
+  element={<DriverRideConfirmed />}
+/>
+
+      </Routes>
+    </BrowserRouter>
   );
 }
 
