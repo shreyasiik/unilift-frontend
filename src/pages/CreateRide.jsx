@@ -32,7 +32,7 @@ function CreateRide({ setRides }) {
       <div className="auth-page">
         <form className="auth-card" onSubmit={handleSubmit}>
           <h2 className="auth-title">Create a Ride</h2>
-          navigate("/driver/ride-confirmed");
+          
 
 
           <input name="pickup" placeholder="Pickup Location" onChange={handleChange} required />
