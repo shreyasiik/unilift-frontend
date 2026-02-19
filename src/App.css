@@ -245,3 +245,48 @@ body {
   border: 1px solid #ccc;
   font-size: 14px;
 }
+.large-card {
+  width: 420px;
+}
+
+.map-wrapper {
+  width: 100%;
+  margin: 15px 0;
+}
+
+.map-container {
+  width: 100%;
+  height: 320px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.large-card {
+  width: 420px;
+}
+
+.map-wrapper {
+  width: 100%;
+  margin: 15px 0;
+}
+
+.map-container {
+  width: 100%;
+  height: 340px;
+  border-radius: 14px;
+  overflow: hidden;
+}
+.large-card {
+  width: 420px;
+}
+
+.map-wrapper {
+  width: 100%;
+  margin: 15px 0;
+}
+
+.map-container {
+  width: 100%;
+  height: 340px;
+  border-radius: 14px;
+  overflow: hidden;
+}
