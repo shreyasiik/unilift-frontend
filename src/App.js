@@ -9,6 +9,8 @@ import RiderDashboard from "./pages/RiderDashboard";
 import CreateRide from "./pages/CreateRide";
 import RideStatus from "./pages/RideStatus";
 import SearchRide from "./pages/SearchRide";
+import AvailableRides from "./pages/AvailableRides";
+
 import DriverRideConfirmed from "./pages/DriverRideConfirmed";
 
 
@@ -43,11 +45,17 @@ function App() {
 
         <Route path="/search-ride" element={<SearchRide />} />
 
-        <Route path="/ride-status/:status" element={<RideStatus />} />
+        <Route path="/ride/status/:status" element={<RideStatus />} />
+
         <Route
   path="/driver/ride-confirmed"
   element={<DriverRideConfirmed />}
 />
+<Route
+  path="/available-rides"
+  element={<AvailableRides rides={rides} />}
+/>
+
 
       </Routes>
     </BrowserRouter>
