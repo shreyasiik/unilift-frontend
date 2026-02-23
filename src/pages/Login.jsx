@@ -9,13 +9,23 @@ function Login() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const API = process.env.REACT_APP_API_URL;
 
   const handleLogin = async (e) => {
     e.preventDefault();
 
+    if (!email || !password) {
+      alert("Please fill all fields");
+      return;
+    }
+
     try {
+      setLoading(true);
+
       const res = await axios.post(
-        "http://localhost:5000/api/auth/login",
+        `${API}/api/auth/login`,
         { email, password },
         { withCredentials: true }
       );
@@ -29,6 +39,8 @@ function Login() {
       }
     } catch (err) {
       alert(err.response?.data?.message || "Login failed");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -41,6 +53,12 @@ function Login() {
           <h2 className="auth-title">
             {role === "driver" ? "Driver Login" : "Rider Login"}
           </h2>
+
+          <p style={{ textAlign: "center", marginBottom: "15px" }}>
+            {role === "driver"
+              ? "Login to manage your rides"
+              : "Login to find rides near you"}
+          </p>
 
           <form onSubmit={handleLogin}>
             <input
@@ -59,14 +77,15 @@ function Login() {
               required
             />
 
-            <button type="submit" className="primary-btn">
-              Login
+            <button type="submit" className="primary-btn" disabled={loading}>
+              {loading ? "Logging in..." : "Login"}
             </button>
           </form>
 
           <p
             className="auth-link"
             onClick={() => navigate(`/signup/${role}`)}
+            style={{ cursor: "pointer" }}
           >
             Don’t have an account? Sign up
           </p>
