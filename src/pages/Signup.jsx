@@ -21,7 +21,7 @@ function Signup() {
 
   const sendOtp = async () => {
     try {
-      const res = await fetch("https://unilift-backend.onrender.com//api/auth/send-otp", {
+      const res = await fetch("http://localhost:5000/api/auth/send-otp", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: email.trim() }),
@@ -45,7 +45,7 @@ function Signup() {
 
   const verifyOtp = async () => {
     try {
-      const res = await fetch("https://unilift-backend.onrender.com//api/auth/verify-otp", {
+      const res = await fetch("http://localhost:5000/api/auth/verify-otp", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -73,8 +73,6 @@ function Signup() {
   const handleRegister = async (e) => {
     e.preventDefault();
 
-    console.log("REGISTER BUTTON CLICKED");
-
     if (!otpVerified) {
       alert("Please verify OTP first");
       return;
@@ -88,7 +86,7 @@ function Signup() {
     }
 
     try {
-      const res = await fetch("https://unilift-backend.onrender.com//api/auth/register", {
+      const res = await fetch("http://localhost:5000/api/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -104,21 +102,18 @@ function Signup() {
       const data = await res.json();
 
       if (res.ok) {
-  alert("Registration successful");
-  navigate(`/login/${role}`);
-} else {
-  if (data.redirectToLogin) {
-    const goToLogin = window.confirm(
-      "Account already exists. Do you want to login instead?"
-    );
-
-    if (goToLogin) {
-      navigate(`/login/${role}`);
-    }
-  } else {
-    alert(data.message);
-  }
-}
+        alert("Registration successful");
+        navigate(`/login/${role}`);
+      } else {
+        if (data.redirectToLogin) {
+          const goToLogin = window.confirm(
+            "Account already exists. Do you want to login instead?"
+          );
+          if (goToLogin) navigate(`/login/${role}`);
+        } else {
+          alert(data.message);
+        }
+      }
     } catch (err) {
       console.log(err);
       alert("Server error during registration");
@@ -144,11 +139,7 @@ function Signup() {
           />
 
           {!otpSent && (
-            <button
-              type="button"
-              className="primary-btn"
-              onClick={sendOtp}
-            >
+            <button type="button" className="primary-btn" onClick={sendOtp}>
               Send OTP
             </button>
           )}
@@ -163,11 +154,7 @@ function Signup() {
                 required
               />
 
-              <button
-                type="button"
-                className="primary-btn"
-                onClick={verifyOtp}
-              >
+              <button type="button" className="primary-btn" onClick={verifyOtp}>
                 Verify OTP
               </button>
             </>
