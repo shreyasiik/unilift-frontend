@@ -22,7 +22,7 @@ function Signup() {
 
   const sendOtp = async () => {
     try {
-      const res = await fetch(`${API_BASE}api/auth/send-otp`, {
+      const res = await fetch(`${API_BASE}/api/auth/send-otp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: email.trim() }),
